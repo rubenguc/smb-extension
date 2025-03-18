@@ -1,24 +1,77 @@
-import React from 'react';
-import logo from '@assets/img/logo.svg';
+import { useEffect, useOptimistic, useState } from "react";
+import { useToggle } from "react-use";
+import {
+  BlockActive,
+  CustomSitesTabs,
+  Header,
+  SocialMediaTab,
+} from "./components";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@src/components/ui/tabs";
+import { backGroundService } from "@src/services";
 
 export default function Popup() {
+  const [isActive, toggleSwitch] = useToggle(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [isBlockedActived, setIsBlockedActived] = useOptimistic(
+    isActive,
+    (_, newStatus: boolean) => newStatus,
+  );
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await backGroundService.getActiveMode();
+        console.log("activemode:", result);
+        toggleSwitch(result);
+      } catch (error) {
+        console.error(error);
+      }
+      setIsLoading(false);
+    })();
+  }, []);
+
+  const onToggle = async () => {
+    try {
+      setIsBlockedActived(true);
+      toggleSwitch();
+      await backGroundService.toggleActiveMode();
+    } catch (error) {
+      setIsBlockedActived(false);
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 text-center h-full p-3 bg-gray-800">
-      <header className="flex flex-col items-center justify-center text-white">
-        <img src={logo} className="h-36 pointer-events-none animate-spin-slow" alt="logo" />
-        <p>
-          Edit <code>src/pages/popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="text-blue-400"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-        <p>Popup styled with TailwindCSS!</p>
-      </header>
+    <div className="h-full p-3 flex flex-col">
+      {!isLoading && (
+        <>
+          <Header isBlockActived={isBlockedActived} toggleActive={onToggle} />
+          <div className="flex flex-1">
+            {isActive ? (
+              <BlockActive onFinishBlock={toggleSwitch} />
+            ) : (
+              <Tabs defaultValue="socialMedia" className="w-full">
+                <TabsList className="w-full">
+                  <TabsTrigger value="socialMedia">Social media</TabsTrigger>
+                  <TabsTrigger value="sites">Sites</TabsTrigger>
+                </TabsList>
+                <TabsContent value="socialMedia" className="p-2">
+                  <SocialMediaTab />
+                </TabsContent>
+                <TabsContent value="sites" className="p-2">
+                  <CustomSitesTabs />
+                </TabsContent>
+              </Tabs>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
