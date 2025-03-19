@@ -34,4 +34,7 @@ export const backGroundService = {
 
   getBlockSites: (): Promise<BlockedSite[]> =>
     sendMessage(BACKGROUND_MESSAGES.GET_BLOCKED_SITES),
+
+  isDomainBlocked: (domain: string): Promise<boolean> =>
+    sendMessage(BACKGROUND_MESSAGES.IS_DOMAIN_BLOCKED, { domain }),
 };
