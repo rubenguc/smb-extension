@@ -32,7 +32,7 @@ jobs:
         run: yarn zip:chrome
 
       - name: Upload Chrome extension artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vite-web-extension-chrome-${{ steps.extract_version.outputs.version }}
           path: chrome.zip
