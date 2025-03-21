@@ -5,3 +5,4 @@ export * from "./Header";
 export * from "./AddCustomSite";
 export * from "./CustomSitesList";
 export * from "./CustomSitesTab";
+export * from "./AddCustomSiteFromTab";

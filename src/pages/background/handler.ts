@@ -87,6 +87,15 @@ export default class BackgroundHandler {
     }
   }
 
+  private isDomainAdded(domain: string) {
+    domain = domain.replace(/^www\./, "");
+    const allDomains = this.blockedSites.map((bs) => bs.domain);
+    const isSocialmediaBlocked = this.blockedSocialMedia.some(
+      (bsm) => bsm.domain === domain,
+    );
+    return allDomains.includes(domain) || isSocialmediaBlocked;
+  }
+
   private isDomainBlocked(domain: string) {
     if (!this.isActive) return false;
 
@@ -117,6 +126,8 @@ export default class BackgroundHandler {
         return this.toggleSocialMedia(props.domain);
       case BACKGROUND_MESSAGES.IS_DOMAIN_BLOCKED:
         return this.isDomainBlocked(props.domain);
+      case BACKGROUND_MESSAGES.IS_DOMAIN_ADDED:
+        return this.isDomainAdded(props.domain);
       default:
         throw new Error("invalid_method");
     }

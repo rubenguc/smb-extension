@@ -34,7 +34,7 @@ export const AddCustomSite: FC<AddCustomSiteProps> = ({ onAddSite }) => {
       <div className="flex items-center gap-2">
         <Input
           placeholder="https://example.com"
-          className="text-white text-sm"
+          className="text-white text-sm border-gray-300/60"
           value={site}
           onChange={(e) => setSite(e.target.value)}
         />
@@ -43,6 +43,7 @@ export const AddCustomSite: FC<AddCustomSiteProps> = ({ onAddSite }) => {
           variant="outline"
           size="icon"
           onClick={handleAddSite}
+          className="border-custom-orange bg-custom-orange hover:bg-custom-orange/80"
         >
           <Plus />
         </Button>

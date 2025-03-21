@@ -37,4 +37,7 @@ export const backGroundService = {
 
   isDomainBlocked: (domain: string): Promise<boolean> =>
     sendMessage(BACKGROUND_MESSAGES.IS_DOMAIN_BLOCKED, { domain }),
+
+  isDomainAdded: (domain: string): Promise<boolean> =>
+    sendMessage(BACKGROUND_MESSAGES.IS_DOMAIN_ADDED, { domain }),
 };

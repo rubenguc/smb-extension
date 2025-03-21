@@ -2,6 +2,7 @@ import { FC } from "react";
 import { AddCustomSite } from "./AddCustomSite";
 import { CustomSitesList } from "./CustomSitesList";
 import { useBlockedSites } from "../hooks/useBlockedSites";
+import { AddCustomSiteFromTab } from "./AddCustomSiteFromTab";
 
 export const CustomSitesTabs: FC = () => {
   const { blockedSites, onAddCustomSite, onRemoveCustomSite } =
@@ -14,6 +15,7 @@ export const CustomSitesTabs: FC = () => {
         blockedSites={blockedSites}
         onRemove={onRemoveCustomSite}
       />
+      <AddCustomSiteFromTab onAddCustomSite={onAddCustomSite} />
     </>
   );
 };

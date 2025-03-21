@@ -20,8 +20,6 @@ export const useBlockedSites = () => {
     try {
       const result = await backGroundService.addCustomSite(domain);
 
-      console.log(result);
-
       setBlockedSites((state) => [
         ...state,
         {

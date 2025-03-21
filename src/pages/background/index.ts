@@ -5,8 +5,6 @@ const handler = new BackgroundHandle();
 
 Browser.runtime.onMessage.addListener(async (request) => {
   try {
-    console.log("message received:", request);
-
     const result = await handler.handler(request.message, request.params);
 
     return {
