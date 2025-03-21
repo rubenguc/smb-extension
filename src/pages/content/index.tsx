@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { backGroundService } from "@src/services";
+import Browser from "webextension-polyfill";
 
 async function init() {
   try {
@@ -15,17 +16,17 @@ async function init() {
       div.id = "__root";
       document.body.appendChild(div);
 
-      // const link = document.createElement("link");
-      // link.rel = "stylesheet";
-      // link.href = "./style.css";
-      // document.head.appendChild(link);
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = Browser.runtime.getURL("/contentStyle.css");
+      document.head.appendChild(link);
 
       const rootContainer = document.querySelector("#__root");
       if (!rootContainer) throw new Error("Can't find Content root element");
       const root = createRoot(rootContainer);
       root.render(
-        <div className="h-dvh w-dvh flex items-center justify-center">
-          <p>blocked papu</p>
+        <div className="container">
+          <p className="text">Paged blocked by SMB extension</p>
         </div>,
       );
     }

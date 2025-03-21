@@ -1,7 +1,7 @@
 {
   "name": "social-media-blocker-extension",
   "displayName": "SMB - Social Media Blocker",
-  "version": "1.1.0",
+  "version": "2",
   "description": "Social media blocker made with Vite, React, TypeScript and Tailwind CSS.",
   "license": "MIT",
   "scripts": {

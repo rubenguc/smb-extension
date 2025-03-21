@@ -1,7 +1,8 @@
 name: Build and Zip Chrome Extension
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   build:
@@ -13,21 +14,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
- 
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
- 
+          cache: "yarn"
+
+      - name: Extract version from package.json
+        id: extract_version
+        run: echo "::set-output name=version::$(node -p 'require("./package.json").version')"
+
       - name: Install dependencies
         run: yarn
- 
+
       - name: Build Chrome
-        run: yarn build:chrome
+        run: yarn zip:chrome
 
       - name: Upload Chrome extension artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: vite-web-extension-chrome
-          path: dist_chrome
+          name: vite-web-extension-chrome-${{ steps.extract_version.outputs.version }}
+          path: chrome.zip

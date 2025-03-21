@@ -1,0 +1,20 @@
+html,
+body,
+#__root {
+    height: 100dvh;
+}
+
+#__root {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.container {
+    align-content: center;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 2rem;
+}
