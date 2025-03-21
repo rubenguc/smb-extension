@@ -72,6 +72,8 @@
 }
 
 @theme inline {
+    --color-custom-white: #e8d9c9;
+    --color-custom-orange: #f3701e;
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);

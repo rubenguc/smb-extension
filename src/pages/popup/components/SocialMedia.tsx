@@ -19,11 +19,12 @@ export const SocialMedia: FC<SocialMediaProps> = ({
         id={domain}
         checked={isBlocked}
         onCheckedChange={() => onToggle(domain)}
+        className="data-[state=checked]:bg-custom-orange"
       />
       <div className="grid gap-1.5 leading-none">
         <Label
           htmlFor={domain}
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white"
+          className="text-sm font-medium leading-none cursor-pointer text-gray-100"
         >
           {DEFAULT_SOCIAL_MEDIA[domain] || domain}
         </Label>

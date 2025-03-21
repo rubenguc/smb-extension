@@ -27,7 +27,6 @@ export default function Popup() {
     (async () => {
       try {
         const result = await backGroundService.getActiveMode();
-        console.log("activemode:", result);
         toggleSwitch(result);
       } catch (error) {
         console.error(error);
@@ -57,9 +56,19 @@ export default function Popup() {
               <BlockActive onFinishBlock={toggleSwitch} />
             ) : (
               <Tabs defaultValue="socialMedia" className="w-full">
-                <TabsList className="w-full">
-                  <TabsTrigger value="socialMedia">Social media</TabsTrigger>
-                  <TabsTrigger value="sites">Sites</TabsTrigger>
+                <TabsList className="w-full bg-custom-white">
+                  <TabsTrigger
+                    value="socialMedia"
+                    className="data-[state=active]:bg-custom-orange data-[state=active]:text-gray-200"
+                  >
+                    Social media
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="sites"
+                    className="data-[state=active]:bg-custom-orange data-[state=active]:text-gray-200"
+                  >
+                    Sites
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="socialMedia" className="p-2">
                   <SocialMediaTab />
